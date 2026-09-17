@@ -1,6 +1,10 @@
 #ifndef FOG_H
 #define FOG_H
 
+// --- CONFIGURACIÃ“N DE INTENSIDAD DE GODRAYS ---
+#define NL_GODRAY_MULTIPLICATOR 2.5 // Multiplica la intensidad final (1.0 = normal, 2.5 = mÃ¡s inteso)
+#define NL_GODRAY_SENSITIVITY   0.05 // Umbral mÃ­nimo de entrada (un valor mÃ¡s bajo hace visibles mÃ¡s rayos)
+
 float nlRenderFogFade(float relativeDist, vec3 FOG_COLOR, vec2 FOG_CONTROL) {
   #ifdef NL_FOG
     float fade = smoothstep(FOG_CONTROL.x, FOG_CONTROL.y, relativeDist);
@@ -16,28 +20,28 @@ float nlRenderFogFade(float relativeDist, vec3 FOG_COLOR, vec2 FOG_CONTROL) {
 }
 
 float nlRenderGodRayIntensity(vec3 cPos, vec3 worldPos, float t, vec2 uv1, float relativeDist, vec3 FOG_COLOR) {
-  // offset wPos (only works upto 16 blocks)
   vec3 offset = cPos - 16.0*fract(worldPos*0.0625);
   offset = abs(2.0*fract(offset*0.0625)-1.0);
   offset = offset*offset*(3.0-2.0*offset);
-  //offset = 0.5 + 0.5*cos(offset*0.392699082);
 
-  //vec3 ofPos = wPos+offset;
   vec3 nrmof = normalize(worldPos);
 
   float u = nrmof.z/length(nrmof.zy);
   float diff = dot(offset,vec3(0.1,0.2,1.0)) + 0.07*t;
   float mask = nrmof.x*nrmof.x;
 
+  // CÃ¡lculo de volumen enriquecido
   float vol = sin(7.0*u + 1.5*diff)*sin(3.0*u + diff);
-  vol *= vol*mask*uv1.y*(1.0-mask*mask);
-  vol *= relativeDist*relativeDist;
-
-  // dawn/dusk mask
+  vol += sin(5.0*u + 0.4*diff)*sin(4.0*u + 0.7*diff);
+  vol *= vol*mask*uv1.y;
+  vol *= min(7.0*relativeDist*(1.0-mask), 1.0);
   vol *= clamp(3.0*(FOG_COLOR.r-FOG_COLOR.b), 0.0, 1.0);
-
-  vol = smoothstep(0.0, 0.1, vol);
-  return vol;
+  
+  // Ajuste de curva y amplificaciÃ³n de la intensidad
+  vol = clamp(vol, 0.0, 1.0);
+  vol = smoothstep(0.0, NL_GODRAY_SENSITIVITY, vol);
+  
+  return vol * NL_GODRAY_MULTIPLICATOR;
 }
 
 #endif
