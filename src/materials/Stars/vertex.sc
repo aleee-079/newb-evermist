@@ -1,3 +1,4 @@
+//Estrellas
 $input a_color0, a_position
 $output v_color0
 
@@ -10,8 +11,9 @@ void main() {
   vec3 pos = a_position;
   vec3 worldPos = mul(u_model[0], vec4(pos, 1.0)).xyz;
 
+  float brightness = 0.6 + 0.4*sin(2.0*(pos.x + pos.y + pos.z));
   vec4 color = a_color0;
-  color.rgb *= 0.6 + 0.4*sin(2.0*pos);
+  color.rgb = vec3(brightness, brightness, brightness);
   color.rgb *= StarsColor.rgb;
 
   v_color0 = color;
