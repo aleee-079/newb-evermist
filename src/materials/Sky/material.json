@@ -20,8 +20,8 @@
   },
   "samplers": [
     {
-      "name": "s_NoiseTex",
-      "texture": "textures/newb/NoiseTex"
+      "name": "s_noisevoxeld",
+      "texture": "textures/newb/noisevoxels"
     }
   ]
 }
