@@ -1,15 +1,15 @@
-name = "Newb Evermist Renewed[1.1.0]"
+name = "Newb Evermist Renewed [1.2.0]"
 version = [1, 1, 0]
 min_supported_mc_version = [1, 26, 40]
 description = '''
-§bThis shader offers a visual experience similar to the BSL shaders. Support 1.26.50+  
-§7- Only Work Whit Minecraft Patch, Mb loader and BetterRenderDragon.
+§bThis shader offers a visual experience similar to the BSL shaders. Support versión 1.26.50+  
+§7- Only Work Whit Minecraft Patch, Mb loader.
 %v
 §3https://newb-shader.devendrn.com/
 ''' # %w = patch warning, %v = version
 authors = ["I'am Alex", "devendrn"]
 url = "https://newb-shader.devendrn.com/"
-uuid = "ad8dce61-4b6c-428a-a358-4da26e3a99ae" # Use https://www.uuidgenerator.net/version4
+uuid = "ad8dcf61-4f6c-498a-f399-4da56a3a99ae" # Use https://www.uuidgenerator.net/version4
 materials = ["Actor", "ActorGlint", "ActorMultiTexture", "Clouds", "EndSky", "ItemInHandColor", "ItemInHandColorGlint", "ItemInHandTextured", "RenderChunk","Sky", "Stars", "SunMoon", "Weather"]
 
 [info] 
