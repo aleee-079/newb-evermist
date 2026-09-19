@@ -33,11 +33,11 @@
 //#define NL_EXPOSURE 1.2              // [toggle] 0.5 dark ~ 3.0 bright
 #define NL_SATURATION 1.3            // [toggle] 0.0 grayscale ~ 4.0 super saturated
 #define NL_TINT                      // [toggle] enable light/dark tone tinting
-#define NL_TINT_LOW  vec3(1.0,1.2,1.2) // color tint for dark tone
+#define NL_TINT_LOW  vec3(1.0,1.2,1.4) // color tint for dark tone
 #define NL_TINT_HIGH vec3(1.5,1.1,1.0) // color tint for light tone
 
 /* Lighting */
-#define NL_SUNLIGHT_INTENSITY   2.8  // 1.0 weak ~ 5.0 bright
+#define NL_SUNLIGHT_INTENSITY   2.7  // 1.0 weak ~ 5.0 bright
 #define NL_TORCHLIGHT_INTENSITY 2.7  // 0.5 weak ~ 3.0 bright
 #define NL_SHADOW_INTENSITY     5.0  // 0.0 no shadow ~ 1.0 strong shadow
 #define NL_MIN_LIGHTING_BOOST   1.5  // 1.0 minimal lighting boost for dark areas ~ 3.0 brighter dark areas
@@ -50,14 +50,14 @@
 
 /* Sun/moon light color */
 #define NL_DAWN_SUNLIGHT_COL   vec3(1.9,1.2,0.5)
-#define NL_NOON_SUNLIGHT_COL   vec3(1.9,1.5,1.3)
+#define NL_NOON_SUNLIGHT_COL   vec3(1.9,1.5,1.4)
 #define NL_NIGHT_MOONLIGHT_COL vec3(0.03,0.0,0.3)
 
 /* Torch colors */
-#define NL_OVERWORLD_TORCH_COL  vec3(1.4,0.8,0.3)
-#define NL_UNDERWATER_TORCH_COL vec3(1.0,0.52,0.18)
-#define NL_NETHER_TORCH_COL     vec3(1.0,0.52,0.18)
-#define NL_END_TORCH_COL        vec3(1.0,0.52,0.18)
+#define NL_OVERWORLD_TORCH_COL  vec3(1.4,0.8,0.4)
+#define NL_UNDERWATER_TORCH_COL vec3(1.4,0.8,0.4)
+#define NL_NETHER_TORCH_COL     vec3(1.5,0.8,0.3)
+#define NL_END_TORCH_COL        vec3(1.2,0.6,0.3)
 
 /* Fog */
 #define NL_FOG 1.0                // [toggle] 0.1 subtle ~ 1.0 blend with sky completely
@@ -75,7 +75,7 @@
 #define NL_DAWN_HORIZON_COL  vec3(1.65,0.20,0.05)  * 1.630
 #define NL_DAWN_EDGE_COL     vec3(2.0,0.9,0.9)
 #define NL_DAY_ZENITH_COL    vec3(0.3,0.9,2.0)
-#define NL_DAY_HORIZON_COL   vec3(1.0,1.6,1.8)
+#define NL_DAY_HORIZON_COL   vec3(0.3,0.9,2.0)
 #define NL_DAY_EDGE_COL      vec3(1.44,1.56,1.62)
 #define NL_NIGHT_ZENITH_COL  vec3(0.02,0.05,0.2)
 #define NL_NIGHT_HORIZON_COL vec3(0.05,0.0,0.3)
@@ -87,7 +87,7 @@
 #define NL_END_HORIZON_COL   vec3(0.34,0.06,0.57)
 
 /* Rainbow */
-#define NL_RAINBOW           // [toggle] enable rainbow in sky
+//#define NL_RAINBOW           // [toggle] enable rainbow in sky
 #define NL_RAINBOW_CLEAR 0.0 // 0.3 subtle ~ 1.0 bright during clear weather
 #define NL_RAINBOW_RAIN  0.2 // 0.3 subtle ~ 1.0 bright during rain weather
 
@@ -95,7 +95,7 @@
 #define NL_GLOW_TEX 8.0           // 0.4 weak ~ 8.0 bright
 #define NL_GLOW_SHIMMER 0.8       // [toggle] 0.1 subtle ~ 1.0 100% shimmer
 #define NL_GLOW_SHIMMER_SPEED 0.9 // 0.5 slow - 2.0 fast
-//#define NL_GLOW_LEAK 0.6        // [toggle] 0.08 subtle ~ 1.0 100% brightness of NL_GLOW_TEX
+#define NL_GLOW_LEAK 0.7        // [toggle] 0.08 subtle ~ 1.0 100% brightness of NL_GLOW_TEX
 
 /* Waving */
 #define NL_PLANTS_WAVE 0.2    // [toggle] 0.02 gentle ~ 0.4 violent
@@ -105,20 +105,20 @@
 #define NL_WAVE_RANGE 13.0     // 6.0 upto 6 blocks ~ 32.0 upto 32 blocks away (slower)
 
 /* Water */
-#define NL_WATER_TRANSPARENCY 1.0 // 0.0 transparent ~ 1.0 normal
+#define NL_WATER_TRANSPARENCY 0.8 // 0.0 transparent ~ 1.0 normal
 #define NL_WATER_BUMP 0.0        // 0.001 plain ~ 0.2 bumpy water
 #define NL_WATER_WAVE_SPEED  0.0  // 0.2 calm ~ 2.0 turbulent
 #define NL_WATER_TEX_OPACITY 0.0  // 0.0 plain water ~ 1.0 vanilla water texture
-//#define NL_WATER_WAVE             // [toggle] wave effect
-#define NL_WATER_REFL_MASK      // [toggle] fake water reflection mask
-#define NL_WATER_TINT vec3(0.20,0.50,1.0)
+#define NL_WATER_WAVE             // [toggle] wave effect
+//#define NL_WATER_REFL_MASK      // [toggle] fake water reflection mask
+#define NL_WATER_TINT vec3(0.0,0.0,0.10)
 
 /* Underwater */
-#define NL_UNDERWATER_BRIGHTNESS 4.0         // 0.0 dark ~ 3.0 bright
-#define NL_CAUSTIC_INTENSITY 4.0             // 0.5 weak ~ 5.0 bright
-#define NL_UNDERWATER_WAVE 0.1               // [toggle] 0.02 subtle ~ 0.6 trippy
-#define NL_UNDERWATER_STREAKS 1.0            // [toggle] 0.8 subtle - 2.0 bright streaks from top
-#define NL_UNDERWATER_TINT vec3(0.9,1.0,0.9) // fog tint color when underwater
+#define NL_UNDERWATER_BRIGHTNESS 1.65         // 0.0 dark ~ 3.0 bright
+#define NL_CAUSTIC_INTENSITY 2.35             // 0.5 weak ~ 5.0 bright
+#define NL_UNDERWATER_WAVE 0.06               // [toggle] 0.02 subtle ~ 0.6 trippy
+#define NL_UNDERWATER_STREAKS 1.35            // [toggle] 0.8 subtle - 2.0 bright streaks from top
+#define NL_UNDERWATER_TINT vec3(0.,0.18,0.18) // fog tint color when underwater
 
 /* Cloud type */
 #define NL_CLOUD_TYPE 2 // 0:vanilla, 1:soft, 2:rounded, 3:realistic
@@ -185,7 +185,7 @@
 //#define NL_CHUNK_LOAD_ANIM 100.0 // [toggle] -600.0 fall from top ~ 600.0 rise from bottom
 
 /* Sun/Moon */
-#define NL_SUN_SIZE  2.7           // 0.3 tiny ~ 4.0 massive
+#define NL_SUN_SIZE  3.0           // 0.3 tiny ~ 4.0 massive
 #define NL_MOON_SIZE 1.5           // 0.3 tiny ~ 4.0 massive
 #define NL_SUN_PATH_YAW    0.0       // Modificado: 0.0 para centrar la dirección del recorrido
 #define NL_MOON_PATH_YAW   17.0 //
