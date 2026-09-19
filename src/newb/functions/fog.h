@@ -3,7 +3,7 @@
 
 // --- CONFIGURACIÃ“N DE INTENSIDAD DE GODRAYS ---
 #define NL_GODRAY_MULTIPLICATOR 2.5 // Multiplica la intensidad final (1.0 = normal, 2.5 = mÃ¡s inteso)
-#define NL_GODRAY_SENSITIVITY   0.05 // Umbral mÃ­nimo de entrada (un valor mÃ¡s bajo hace visibles mÃ¡s rayos)
+#define NL_GODRAY_SENSITIVITY   0.04 // Umbral mÃ­nimo de entrada (un valor mÃ¡s bajo hace visibles mÃ¡s rayos)
 
 float nlRenderFogFade(float relativeDist, vec3 FOG_COLOR, vec2 FOG_CONTROL) {
   #ifdef NL_FOG
