@@ -36,7 +36,17 @@ void main() {
 
   albedo = applyOverlayColor(albedo, OverlayColor);
 
+  float isGlowPixel = step(0.9875, albedo.a) * (1.0 - step(0.9925, albedo.a));
+
+  vec3 baseColor = albedo.rgb;
+
+  //Normal Lighting
   albedo.rgb *= albedo.rgb * v_light.rgb;
+
+  // GLOW EMISSIVE 
+  vec3 glowColor = baseColor * 8.0;
+
+  albedo.rgb = mix(albedo.rgb, glowColor, isGlowPixel);
 
   albedo.rgb *= nlEntityEdgeHighlight(v_edgemap);
 
