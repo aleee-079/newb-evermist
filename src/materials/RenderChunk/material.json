@@ -17,11 +17,5 @@
     "SunDirection": "BUILTIN_MinecraftSunDirection",
     "CloudColor": "BUILTIN_MinecraftCloudColor",
     "FogColor": "BUILTIN_MinecraftFogColor"
-  },
-  "samplers": [
-    {
-      "name": "s_noisevoxeld",
-      "texture": "textures/newb/noisevoxels"
-    }
-  ]
+  }
 }
