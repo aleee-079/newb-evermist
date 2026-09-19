@@ -30,33 +30,21 @@ void main() {
 
   diffuse.rgb *= diffuse.rgb;
 
-  vec3 waterPixelHighlight = vec3(0.0, 0.0, 0.0);
-
   #if defined(TRANSPARENT) && !(defined(SEASONS) || defined(RENDER_AS_BILLBOARDS))
     if (v_extra.b > 0.9) {
-      vec4 diff2 = texture2D(s_MatTexture, v_texcoord0);
-      float dif2 = (diff2.r + diff2.g + diff2.b)/3.0;
-      
-      float hl = smoothstep(0.55, 1.0, dif2);
-      
       diffuse.rgb = vec3_splat(1.0 - NL_WATER_TEX_OPACITY*(1.0 - diffuse.b*1.8));
-      diffuse.rgb *= v_fog.rgb * 1.8;
       diffuse.a = color.a;
-      
-      vec3 waterHighlightColor = vec3(0.85, 0.88, 0.92);
-      float hlIntensity = mix(0.01, 3.5, clamp(v_color1.g * 2.0, 0.0, 1.0));
-      
-      waterPixelHighlight = waterHighlightColor * hl * hlIntensity;
-      diffuse.a += mix(0.0, 0.5, clamp(v_color1.g * 2.0, 0.0, 1.0)) * hl;
     }
   #else
     diffuse.a = 1.0;
   #endif
 
   diffuse.rgb *= color.rgb;
+  
+  // --- SOMBRAS ---
 
-  // --- CÓDIGO DE SOMBRAS INTEGRADO ---
-  if (v_color1.a != 0.0) {
+//------------------------------------------------------
+    if (v_color1.a != 0.0) {
     if (v_color1.g < 0.64) {
         diffuse.rgb *= vec3(0.96,0.96,0.96);
     }
@@ -70,7 +58,7 @@ void main() {
         diffuse.rgb *= vec3(0.95,0.95,0.95);
     }
     if (v_color1.g < 0.636) {
-        diffuse.rgb *= vec3(0.95,0.95,0.95);
+    diffuse.rgb *= vec3(0.95,0.95,0.95);
     }
     if (v_color1.g < 0.635) {
         diffuse.rgb *= vec3(0.89,0.89,0.89);
@@ -90,42 +78,19 @@ void main() {
     if (v_color1.g < 0.63) {
         diffuse.rgb *= vec3(0.887,0.887,0.887); 
     }    
-  }
+}
 
-  if (v_color1.a == 0.0) {
-    diffuse.rgb *= 1.55;
-    diffuse.rgb *= v_color1.g * 1.3;
-  }
+if(v_color1.a==0.0){
+diffuse.rgb *= 1.55;
+diffuse.rgb *= v_color1.g*1.3;
+}
 
-  float c = v_color1.r;
-  if (v_color1.a <= 0.1) { 
-    c = v_color1.g * 1.999; 
-  }
-  if (c < 0.638) { 
-    diffuse.rgb *= 0.9; 
-  }
-  // -----------------------------------
+float c = v_color1.r;
+if(v_color1.a<=0.1){ c = v_color1.g*1.999; }
+if(c<0.638){ diffuse.rgb *= 0.9; }
+//-----------------------------------------------
 
   diffuse.rgb += glow;
-  diffuse.rgb += waterPixelHighlight;
-
-  // --- Water Foam Detection ---
-  float dy_w = abs(dFdy(v_extra.g));
-  float lmGrad = length(vec2(dFdx(v_lightmapUV.y), dFdy(v_lightmapUV.y)));
-
-  bool isOneBlockUnderwater = (v_extra.g <= 62.99 && v_extra.g > 62.0) 
-      && v_extra.b < 0.9
-      && !(dy_w < 0.0002)
-      && lmGrad < 0.01
-      && step(0.85, v_lightmapUV.y) * step(v_lightmapUV.y, 0.927) == 1.0;
-
-  if (isOneBlockUnderwater) {
-    vec2 watpos = v_extra.rg * 16.0;
-    float foam = fract(238.084 * sin(dot(floor(watpos), vec2(1.32, 141.3))));
-    foam = smoothstep(0.2, 0.8, foam);
-    diffuse.rgb = mix(diffuse.rgb, vec3(1.0, 1.0, 1.3) * 2.5, foam * 0.5);
-  }
-  // --------------------------------------------------
 
   if (v_extra.b > 0.9) {
     diffuse.rgb += v_refl.rgb*v_refl.a;
